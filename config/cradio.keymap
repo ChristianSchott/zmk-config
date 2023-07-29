@@ -21,11 +21,11 @@
 #define L_INTL    5
 #define L_GAME    6
 
-#define CTL_SPACE  &mt LCTRL  SPACE
-#define SHFT_ESC   &mt LSHIFT ESC
-#define GUI_TAB    &mt LGUI   TAB
-#define ALT_GRV    &mt LALT   GRAVE
-#define INTL_RET   &lt L_INTL RET
+#define CTL_SPACE()  &mt LCTRL  SPACE
+#define SHFT_ESC()   &mt LSHIFT ESC
+#define GUI_TAB()    &mt LGUI   TAB
+#define ALT_GRV()    &mt LALT   GRAVE
+#define INTL_RET()   &lt L_INTL RET
 
 / {
     behaviors {
@@ -57,9 +57,9 @@
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
             &kp A      &kp R      &kp S      &kp T      &kp G          &kp M      &kp N      &kp E      &kp I      &kp O
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-            &kp Z      &kp X      &kp C      &kp D      &kp V          &kp K      &kp H      GUI_TAB    ALT_GRV    INTL_RET
+            &kp Z      &kp X      &kp C      &kp D      &kp V          &kp K      &kp H      GUI_TAB()  ALT_GRV()  INTL_RET()
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                             &mo L_NAV  CTL_SPACE      SHFT_ESC   &mo L_SYM
+                                             &mo L_NAV  CTL_SPACE()    SHFT_ESC() &mo L_SYM
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯                                    
         >; };
 
