@@ -13,27 +13,13 @@
 
 
 #define L_DEF     0
-#define L_SYM     1
-#define L_NAV     2
-#define L_NUM     3
+#define L_SYM     2
+#define L_NAV     3 
+#define L_NUM     4
 
-#define SHFT_SPC   &ht &sft  SPACE
-#define ALT_GRV    &ht LALT    GRAVE
+#define ALT_GRV    &ht LALT  GRAVE
 
 / {
-    behaviors {
-        ht: hold_tap {
-            label = "hold_tap";
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <135>;
-            global-quick-tap;
-            bindings = <&kp>, <&kp>;
-            retro-tap;
-        };
-    };
-
     macros {
         // turn on dummy layer + &kp <param>
         sft: sft {
@@ -51,11 +37,35 @@
         };
     };
 
+    behaviors {
+        ht: hold_tap {
+            label = "hold_tap";
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <135>;
+            global-quick-tap;
+            bindings = <&kp>, <&kp>;
+            retro-tap;
+        };
+
+        st: hold_tap {
+            label = "hold_tap";
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <135>;
+            global-quick-tap;
+            bindings = <&sft>, <&kp>;
+            retro-tap;
+        };
+    };
+
     conditional_layers {
         compatible = "zmk,conditional-layers";
         tri_layer {
-            if-layers = <1 2>;  // dummy + symbol
-            then-layer = <3>;   // navigation
+            if-layers = <1 2>;
+            then-layer = <3>;
         };
     };
 
@@ -69,7 +79,7 @@
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
             &kp Z      &kp X      &kp C      &kp D      &kp V          &kp K      &kp H      &kp TAB    ALT_GRV    &kp RET
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                             &kp LCTRL  SHFT_SPC       &mo L_SYM  &mo L_NUM
+                                             &kp LCTRL  &st 0 SPACE    &mo L_SYM  &mo L_NUM
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯                                    
         >; };
 
@@ -123,16 +133,16 @@
 
         // TODO: mouse layer
 
-        game_layer {   bindings = <
+        //game_layer {   bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-            &kp ESC    &kp Q      &kp W      &kp E      &kp R          &kp T      &kp U      &kp I      &kp O      &kp BSPC
+        //    &kp ESC    &kp Q      &kp W      &kp E      &kp R          &kp T      &kp U      &kp I      &kp O      &kp BSPC
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-            &kp LSHFT  &kp A      &kp S      &kp D      &kp F          &kp G      &kp J      &kp K      &kp L      &kp P
+        //    &kp LSHFT  &kp A      &kp S      &kp D      &kp F          &kp G      &kp J      &kp K      &kp L      &kp P
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-            &kp LCTRL  &kp Z      &kp X      &kp C      &kp V          &kp N      &kp M      &kp LALT   &kp LGUI   &kp RET
+        //    &kp LCTRL  &kp Z      &kp X      &kp C      &kp V          &kp N      &kp M      &kp LALT   &kp LGUI   &kp RET
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                             &kp TAB    &kp SPACE     &tog L_GAME &trans
+        //                                     &kp TAB    &kp SPACE     &tog L_GAME &trans
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
-        >; };
+        // >; };
     };
 };
